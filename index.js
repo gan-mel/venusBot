@@ -5,8 +5,8 @@ const Agent = require('node-agent-sdk').Agent;
 
 const agent = new Agent({
 accountId: "81312216",
-username: "VenusBot1",
-password: "Tomtom11"
+username: "x",
+password: "x"
 });
 
 
