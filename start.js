@@ -1,7 +1,7 @@
 'use strict';
 
 const Agent = require('node-agent-sdk').Agent;
-var pcs = require('./fortunes.json');
+var fortune = require('./fortunes.json');
 
 
 const agent = new Agent({
@@ -90,22 +90,22 @@ agent.on('cqm.ExConversationChangeNotification', notificationBody => {
                     () => {
                        // sendSC(change.result.convId,pcs.login);
                       //  testText(change.result.convId,"TESTING LOL1")
-
-                      agent.publishEvent({
-                        dialogId: change.result.convId,
-                        event: {
-                            type: 'RichContentEvent',
-                            content: test
-                        }
+                      sendingSC(change.result.convId,fortune);
+                    //   agent.publishEvent({
+                    //     dialogId: change.result.convId,
+                    //     event: {
+                    //         type: 'RichContentEvent',
+                    //         content: fortune
+                    //     }
                          
-                        }, (e, r) => {
-                            if (e) {
-                                console.log(`sendRichContent card ${change.result.convId} ${JSON.stringify(e)} ${JSON.stringify(test)}`)
-                            } else {
-                                console.log(`sendRichContent successful: ${JSON.stringify(r)}`)
-                            }
-                        }
-                    );
+                    //     }, (e, r) => {
+                    //         if (e) {
+                    //             console.log(`sendRichContent card ${change.result.convId} ${JSON.stringify(e)} ${JSON.stringify(test)}`)
+                    //         } else {
+                    //             console.log(`sendRichContent successful: ${JSON.stringify(r)}`)
+                  //        }
+                      //  }
+                   // );
     
                     
                     });
@@ -204,7 +204,7 @@ function getParticipantInfo(convDetails, participantId) {
     return convDetails.participants.filter(p => p.id === participantId)[0];
 }
 
-function sendSC(conversationID, content) {
+function sendingSC(conversationID, content) {
      console.log("Sending SC");
     // session[conversationID]["typing"] = true;
     //    updateTyping(conversationID, true);
@@ -212,47 +212,16 @@ function sendSC(conversationID, content) {
             dialogId: conversationID,
             event: {
                 type: 'RichContentEvent',
-                content: 
+                content: content
                 
-                {
-                    "login": {
-                        "question1": {
-                            "text": "What is your account number?",
-                            "saveTo": "account_number",
-                            "next": {
-                                "action": "question",
-                                "step": "question2"
-                            }
-                        },
-                        "question2": {
-                            "text": "Thank you!\nWhat is your login name?",
-                            "saveTo": "user_name",
-                            "next": {
-                                "action": "escalation",
-                                "skill": "toby"
-                            }
-                        },
-                        "metadata": "Support - Login Issues"
-                    },
-                    "other": {
-                        "question1": {
-                            "text": "What is your account number?",
-                            "saveTo": "account_number",
-                            "next": {
-                                "action": "escalation",
-                                "skill": "support"
-                            }
-                        },
-                        "metadata": "Support - Other"
-                    }
-                }
-
-            }
-        });
+                
         //        updateTyping(conversationID, false);
         // session[conversationID]["typing"] = false;
 
-    }
+            }
+          })
+        }
+
         function testText(conversationID, myText) {
             console.log("Sending SC");
            // session[conversationID]["typing"] = true;
