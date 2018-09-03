@@ -1,0 +1,250 @@
+{
+    "step1": {
+        "type": "vertical",
+        "elements": [
+            {
+                "type": "button",
+                "title": "Welcome to LivePerson",
+                "click": {},
+                "style": {
+                    "bold": true,
+                    "size": "medium",
+                    "color": "white",
+                    "background-color": "#FF720B"
+                }
+            },
+            {
+                "type": "text",
+                "text": "Please choose from the following menu options:",
+                "tooltip": "text tooltip"
+            },
+            {
+                "type": "button",
+                "title": "Sales",
+                "click": {
+                    "actions": [
+                        {
+                            "type": "publishText",
+                            "text": "*sales"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "button",
+                "title": "Technical Support",
+                "click": {
+                    "actions": [
+                        {
+                            "type": "publishText",
+                            "text": "#2"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "step2": {
+        "type": "vertical",
+        "elements": [
+            {
+                "type": "button",
+                "title": "Technical Support",
+                "click": {},
+                "style": {
+                    "bold": true,
+                    "size": "medium",
+                    "color": "white",
+                    "background-color": "#FF720B"
+                }
+            },
+            {
+                "type": "button",
+                "title": "Login",
+                "click": {
+                    "actions": [
+                        {
+                            "type": "publishText",
+                            "text": "*login"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "button",
+                "title": "API/SDK",
+                "click": {
+                    "actions": [
+                        {
+                            "type": "publishText",
+                            "text": "#3"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "button",
+                "title": "Other",
+                "click": {
+                    "actions": [
+                        {
+                            "type": "publishText",
+                            "text": "*agent"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "step3": {
+        "type": "vertical",
+        "elements": [
+            {
+                "type": "text",
+                "text": "Did you know?",
+                "style": {
+                    "bold": true,
+                    "size": "large"
+                }
+            },
+            {
+                "type": "text",
+                "text": "Most API and SDK questions are not solve in chat.<br>Instead, we recommend you to login to our Developer community and if needed you can submit an issue there",
+                "tooltip": "text tooltip"
+            },
+            {
+                "type": "button",
+                "title": "OK, Take me to the Developer Community",
+                "click": {
+                    "actions": [
+                        {
+                            "type": "link",
+                            "name": "More Info",
+                            "uri": "https://developers.liveperson.com"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "button",
+                "title": "Transfer me to a live agent",
+                "click": {
+                    "actions": [
+                        {
+                            "type": "publishText",
+                            "text": "*agent"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "serviceIncident": {
+        "type": "vertical",
+        "elements": [
+            {
+                "type": "button",
+                "tooltip": "button tooltip",
+                "title": "Impact on service",
+                "click": {},
+                "style": {
+                    "bold": true,
+                    "size": "medium",
+                    "color": "white",
+                    "background-color": "#ff4800"
+                }
+            },
+            {
+                "type": "text",
+                "text": "$IMPACT",
+                "tooltip": "text tooltip"
+            },
+            {
+                "type": "horizontal",
+                "elements": [
+                    {
+                        "type": "text",
+                        "text": "Started on (EST)",
+                        "style": {
+                            "bold": true,
+                            "size": "small"
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "text": "03/14/2019 04:47 PM",
+                        "style": {
+                            "size": "small"
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "horizontal",
+                "elements": [
+                    {
+                        "type": "text",
+                        "text": "Incident ID",
+                        "style": {
+                            "bold": true,
+                            "size": "small"
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "text": "$INCIDENTID",
+                        "style": {
+                            "size": "small"
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "button",
+                "title": "Click here for more information",
+                "click": {
+                    "actions": [
+                        {
+                            "type": "link",
+                            "name": "More Info",
+                            "uri": "$URL"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "incident": {
+        "type": "vertical",
+        "elements": [
+            {
+                "type": "text",
+                "text": "Is there anything else I can help with?"
+            },
+            {
+                "type": "button",
+                "title": "Yes",
+                "click": {
+                    "actions": [
+                        {
+                            "type": "publishText",
+                            "text": "Yes"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "button",
+                "title": "No",
+                "click": {
+                    "actions": [
+                        {
+                            "type": "publishText",
+                            "text": "No"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
