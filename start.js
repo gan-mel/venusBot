@@ -2,12 +2,12 @@
 
 const Agent = require('node-agent-sdk').Agent;
 var fortune = require('./fortunes.json');
-
+var rp = require('request-promise');
 
 const agent = new Agent({
     accountId: "56566693",
-    username: "x",
-    password: "x"
+    username: "VenusBot",
+    password: "Toptop11"
     });
 
 let myConfig = {
@@ -57,8 +57,9 @@ agent.on('connected', () => {
         getClock(agent)
     }, myConfig.intervals * 1000);
 
-   
+
 });
+
 
 agent.on('cqm.ExConversationChangeNotification', notificationBody => {
     notificationBody.changes.forEach(change => {
@@ -143,7 +144,9 @@ body.changes.forEach(c => {
         };
         let msg = c.event.message.toLowerCase();
 if (msg == "leo"){
-              
+    
+    fetchHoroscopes(body.dialogId,msg);
+
                         agent.publishEvent({
                             dialogId: body.dialogId,
                             event: {
@@ -222,8 +225,8 @@ function sendingSC(conversationID, content) {
           })
         }
 
-        function testText(conversationID, myText) {
-            console.log("Sending SC");
+        function textSend(conversationID, myText) {
+            console.log("Sending Text");
            // session[conversationID]["typing"] = true;
            //    updateTyping(conversationID, true);
                         agent.publishEvent({
@@ -235,3 +238,61 @@ function sendingSC(conversationID, content) {
                             }
                         });
                     }
+
+                   const fetchHoroscopes = (conversationID,sign) => {
+                    var options = {
+                        uri: `http://horoscope-api.herokuapp.com/horoscope/today/${sign}`,
+
+                        headers: {
+                            'User-Agent': 'Request-Promise'
+                        },
+                       json: true // Automatically parses the JSON string in the response
+                    };
+                    
+                    rp(options)
+                        .then((res) => {
+                            console.log('User has', res.horoscope);
+                            textSend(conversationID,res.horoscope)
+                        })
+                        .catch( (err) => {
+                            console.log(err+ " ERROR")
+                        });
+                    }
+                    // const fetchHoroscopes = async (sign) => {
+
+                    //    await fetch(`https://www.astrology.com/horoscope/daily/${sign}.html`)
+                    //     .then( response => response.json())
+                    //         .then( json => {
+                    //             console.log(json)
+                    //             })
+                    //         .catch( error => {
+                    //                console.log(error)
+                    //             });
+                    //         }
+
+                    //     return new Promise((resolve, reject) => {
+                    //     request(`https://www.astrology.com/horoscope/daily/${sign}.html`, { json: true }, (err, res, body) => {
+                    //         if (err) { 
+                    //             reject(response.error)
+                    //             return console.log(err); }
+                    //             {
+                    //               resolve({pageContent: response.data, url})
+                    //             }
+                    //         }
+                    //     }
+                    // }
+                
+                          
+
+
+                    //     return new Promise((resolve, reject) => {
+                    //       const url = `https://www.astrology.com/horoscope/daily/${sign}.html`
+                    //       muxbots.http.get(url, (response) => {
+                    //         if (!response.data) {
+                    //           reject(response.error)
+                    //         }
+                    //         resolve({pageContent: response.data, url})
+                        
+                    //       })
+                    //     })
+                    // }
