@@ -1,3 +1,2 @@
-Work in progress, 
-
-TODO: build an Astrology advisor bot
+Change credentials to your own and
+Run - node start.js
