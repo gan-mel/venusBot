@@ -88,21 +88,21 @@ body.changes.forEach(c => {
             message: c.event.message
         };
                 let msg = c.event.message.toLowerCase();
-                console.log(msg+  "  MSG IS")
+                console.log(msg +  "  MSG IS")
 
-               // console.log(`${msg}   MESSAGEIS `)
-                  if (msg == "leo" ) {
-                 console.log("GOT LEO")
+               // console.log(`${msg} MESSAGEIS `)
+                  if (msg == "leo" || msg == "virgo" ) {
+                // console.log("GOT LEO")
 
-                  textSend(body.dialogId,"Fetching your daily fortune...")
+                   textSend(body.dialogId,"Fetching your daily fortune...")
                    fetchHoroscopes(body.dialogId,msg);       
                    
-                  } else if (msg.length > 0) {
-                    textSend(body.dialogId,"Sorry, I don't speak free text :'(");
-                    console.log("LONGER THAN 0 MSG")
-               }
+                  } //else if (msg.length > 0 && ) {
+                   // textSend(body.dialogId,"Sorry, I don't speak free text :'(");
+                    //console.log("LONGER THAN 0 MSG")
+              // }
                 }
-       console.log("CONTENT " + JSON.stringify(respond) );
+      // console.log("CONTENT " + JSON.stringify(respond) );
 
         
     // remove from respond list all the messages that were already read
@@ -144,15 +144,15 @@ const getClock = (context) => {
     });
 };
 
-function getParticipantInfo(convDetails, participantId) {
+function getParticipantInfo(convDetails, participantId) { 
     return convDetails.participants.filter(p => p.id === participantId)[0];
 }
 
 function sendingSC(conversationID, content) {
-     console.log("Sending SC");
-    // session[conversationID]["typing"] = true;
-    //    updateTyping(conversationID, true);
-        agent.publishEvent({
+     console.log("Sending SC" +  openConvs[conversationID]);
+      openConvs[conversationID]["typing"] = true;
+       // updateTyping(conversationID, true);
+       setTimeout( () => agent.publishEvent({
             dialogId: conversationID,
             event: {
                 type: 'RichContentEvent',
@@ -163,7 +163,7 @@ function sendingSC(conversationID, content) {
         // session[conversationID]["typing"] = false;
 
             }
-          })
+          }),3000)
         }
 
        function textSend(conversationID, myText) {
@@ -197,7 +197,7 @@ function sendingSC(conversationID, content) {
                     
                     rp(options)
                         .then((res) => {
-                            console.log('User has', res.horoscope);
+                           // console.log('User has', res.horoscope);
                             textSend(conversationID,res.horoscope)
                         })
                         .catch( (err) => {

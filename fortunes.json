@@ -17,12 +17,12 @@
         {
             "type": "button",
             "tooltip": "button tooltip",
-            "title": "Virgin",
+            "title": "Virgo",
             "click": {
                 "actions": [
                     {
                         "type": "publishText",
-                        "text": "Virgin"
+                        "text": "Virgo"
                     }
                 ]
             }
