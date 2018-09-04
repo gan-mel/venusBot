@@ -149,8 +149,8 @@ function getParticipantInfo(convDetails, participantId) {
 }
 
 function sendingSC(conversationID, content) {
-     console.log("Sending SC" +  openConvs[conversationID]);
-      openConvs[conversationID]["typing"] = true;
+  //   console.log("Sending SC" +  openConvs[conversationID]);
+   //   openConvs[conversationID]["typing"] = true;
        // updateTyping(conversationID, true);
        setTimeout( () => agent.publishEvent({
             dialogId: conversationID,
