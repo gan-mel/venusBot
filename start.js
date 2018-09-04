@@ -93,7 +93,7 @@ body.changes.forEach(c => {
                // console.log(`${msg} MESSAGEIS `)
                   if (msg == "leo" || msg == "virgo" || msg == "ariess" || msg == "taurus" || 
                   msg == "gemini" || msg == "cancer" || msg == "pisces" || msg == "aquarius" || 
-                  msg == "libra" || msg == "scorpio" || msg == "sagittarius" ) {
+                  msg == "libra" || msg == "scorpio" || msg == "sagittarius" || msg == "capricorn" ) {
                 // console.log("GOT LEO")
 
                    textSend(body.dialogId,"Fetching your daily fortune...")
