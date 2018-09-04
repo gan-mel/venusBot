@@ -91,21 +91,16 @@ body.changes.forEach(c => {
               //  console.log(msg +  "  MSG IS")
 
                // console.log(`${msg} MESSAGEIS `)
-                  if (msg == "leo" || msg == "virgo" || msg == "ariess" || msg == "taurus" || 
-                  msg == "gemini" || msg == "cancer" || msg == "pisces" || msg == "aquarius" || 
-                  msg == "libra" || msg == "scorpio" || msg == "sagittarius" || msg == "capricorn" ) {
-                // console.log("GOT LEO")
-
+                  if (isFortune) {
                    textSend(body.dialogId,"Fetching your daily fortune...")
                    fetchHoroscopes(body.dialogId,msg);       
-                   
-                  } //else if (msg.length > 0 && ) {
+                  } 
+                  
+                  //else if (msg.length > 0 && ) {
                    // textSend(body.dialogId,"Sorry, I don't speak free text :'(");
                     //console.log("LONGER THAN 0 MSG")
               // }
                 }
-      // console.log("CONTENT " + JSON.stringify(respond) );
-
         
     // remove from respond list all the messages that were already read
     if (c.event.type === 'AcceptStatusEvent' && c.originatorId === agent.agentId) {
@@ -206,4 +201,13 @@ function sendingSC(conversationID, content) {
                             console.log(err+ " ERROR")
                         });
                     }
+
+            function isFortune(){
+                if (
+                msg == "leo" || msg == "virgo" || msg == "ariess" || msg == "taurus" || 
+                  msg == "gemini" || msg == "cancer" || msg == "pisces" || msg == "aquarius" || 
+                  msg == "libra" || msg == "scorpio" || msg == "sagittarius" || msg == "capricorn" 
+                )
+                return true;
+            }
 
