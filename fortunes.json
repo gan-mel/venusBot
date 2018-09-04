@@ -17,6 +17,97 @@
         {
             "type": "button",
             "tooltip": "button tooltip",
+            "title": "Aries",
+            "click": {
+                "actions": [
+                    {
+                        "type": "publishText",
+                        "text": "Aries"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "tooltip": "button tooltip",
+            "title": "Taurus",
+            "click": {
+                "actions": [
+                    {
+                        "type": "publishText",
+                        "text": "Taurus"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "tooltip": "button tooltip",
+            "title": "Gemini",
+            "click": {
+                "actions": [
+                    {
+                        "type": "publishText",
+                        "text": "Gemini"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "tooltip": "button tooltip",
+            "title": "Cancer",
+            "click": {
+                "actions": [
+                    {
+                        "type": "publishText",
+                        "text": "Cancer"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "tooltip": "button tooltip",
+            "title": "Pisces",
+            "click": {
+                "actions": [
+                    {
+                        "type": "publishText",
+                        "text": "Pisces"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "tooltip": "button tooltip",
+            "title": "Aquarius",
+            "click": {
+                "actions": [
+                    {
+                        "type": "publishText",
+                        "text": "Aquarius"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "tooltip": "button tooltip",
+            "title": "Libra",
+            "click": {
+                "actions": [
+                    {
+                        "type": "publishText",
+                        "text": "Libra"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "tooltip": "button tooltip",
             "title": "Virgo",
             "click": {
                 "actions": [
@@ -26,6 +117,46 @@
                     }
                 ]
             }
+        },
+        {
+            "type": "button",
+            "tooltip": "button tooltip",
+            "title": "Scorpio",
+            "click": {
+                "actions": [
+                    {
+                        "type": "publishText",
+                        "text": "Scorpio"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "tooltip": "button tooltip",
+            "title": "Sagittarius",
+            "click": {
+                "actions": [
+                    {
+                        "type": "publishText",
+                        "text": "Sagittarius"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "tooltip": "button tooltip",
+            "title": "Capricorn",
+            "click": {
+                "actions": [
+                    {
+                        "type": "publishText",
+                        "text": "Capricorn"
+                    }
+                ]
+            }
         }
+       
     ]
 }

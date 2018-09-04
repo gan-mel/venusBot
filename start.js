@@ -88,10 +88,12 @@ body.changes.forEach(c => {
             message: c.event.message
         };
                 let msg = c.event.message.toLowerCase();
-                console.log(msg +  "  MSG IS")
+              //  console.log(msg +  "  MSG IS")
 
                // console.log(`${msg} MESSAGEIS `)
-                  if (msg == "leo" || msg == "virgo" ) {
+                  if (msg == "leo" || msg == "virgo" || msg == "ariess" || msg == "taurus" || 
+                  msg == "gemini" || msg == "cancer" || msg == "pisces" || msg == "aquarius" || 
+                  msg == "libra" || msg == "scorpio" || msg == "sagittarius" ) {
                 // console.log("GOT LEO")
 
                    textSend(body.dialogId,"Fetching your daily fortune...")
