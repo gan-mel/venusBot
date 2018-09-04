@@ -1,0 +1,33 @@
+{
+    "type": "vertical",
+    "elements": [
+        {
+            "type": "button",
+            "tooltip": "button tooltip",
+            "title": "Learn more",
+            "click": {
+                "actions": [
+                    {
+                        "type": "publishText",
+                        "text": "Learn more"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "tooltip": "button tooltip",
+            "title": "Trasnfer to a real Astologist",
+            "click": {
+                "actions": [
+                    {
+                        "type": "publishText",
+                        "text": "Transferring to a real astrologist"
+                    }
+                ]
+            }
+        }
+
+       
+    ]
+}

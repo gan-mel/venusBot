@@ -2,12 +2,13 @@
 
 const Agent = require('node-agent-sdk').Agent;
 var fortune = require('./fortunes.json');
+var learn = require('./learnMore.json');
 var rp = require('request-promise');
 
 const agent = new Agent({
     accountId: "56566693",
-    username: "x",
-    password: "x"
+    username: "VenusBot",
+    password: "Toptop11"
     });
 
 let myConfig = {
@@ -91,16 +92,27 @@ body.changes.forEach(c => {
               //  console.log(msg +  "  MSG IS")
 
                // console.log(`${msg} MESSAGEIS `)
-                  if (isFortune) {
+                  if (msg == "leo" || msg == "virgo" || msg == "ariess" || msg == "taurus" || 
+                  msg == "gemini" || msg == "cancer" || msg == "pisces" || msg == "aquarius" || 
+                  msg == "libra" || msg == "scorpio" || msg == "sagittarius" || msg == "capricorn" ) {
+                // console.log("GOT LEO")
+
                    textSend(body.dialogId,"Fetching your daily fortune...")
                    fetchHoroscopes(body.dialogId,msg);       
+                   sendingSC(body.dialogId,learn);       
+                   
+
+            } else  if(msg == "transferring to a real astrologist"){
+                    console.log("Trasnfer outsdie")
+                    transferSkill(body.dialogId,"1144089632")  
                   } 
-                  
-                  //else if (msg.length > 0 && ) {
+                   //else if (msg.length > 0 && ) {
                    // textSend(body.dialogId,"Sorry, I don't speak free text :'(");
                     //console.log("LONGER THAN 0 MSG")
               // }
                 }
+      // console.log("CONTENT " + JSON.stringify(respond) );
+
         
     // remove from respond list all the messages that were already read
     if (c.event.type === 'AcceptStatusEvent' && c.originatorId === agent.agentId) {
@@ -202,12 +214,27 @@ function sendingSC(conversationID, content) {
                         });
                     }
 
-            function isFortune(){
-                if (
-                msg == "leo" || msg == "virgo" || msg == "ariess" || msg == "taurus" || 
-                  msg == "gemini" || msg == "cancer" || msg == "pisces" || msg == "aquarius" || 
-                  msg == "libra" || msg == "scorpio" || msg == "sagittarius" || msg == "capricorn" 
-                )
-                return true;
-            }
+                    function transferSkill(conversationID, targetSkillId) {
+                        console.log("Sending Text");
+                       // session[conversationID]["typing"] = true;
+                       //    updateTyping(conversationID, true);
+                       agent.updateConversationField({
+                        'conversationId': conversationID,
+                            'conversationField': [
+                                {
+                                    'field': 'ParticipantsChange',
+                                    'type': 'REMOVE',
+                                    'role': 'ASSIGNED_AGENT'
+                                },
+                                {
+                                    'field': 'Skill',
+                                    'type': 'UPDATE',
+                                    'skill': targetSkillId
+                                }
+                            ]
+                        }, (e, resp) => {
+                            if (e) { console.error(e) }
+                            console.log(resp)
+                        });
+                            } 
 
