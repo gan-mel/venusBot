@@ -13,37 +13,6 @@ const agent = new Agent({
 let myConfig = {
     intervals : 200
 }
-const test = {
-    "type": "vertical",
-    "elements": [
-        {
-            "type": "button",
-            "tooltip": "button tooltip",
-            "title": "Leo",
-            "click": {
-                "actions": [
-                    {
-                        "type": "publishText",
-                        "text": "Leo"
-                    }
-                ]
-            }
-        },
-        {
-            "type": "button",
-            "tooltip": "button tooltip",
-            "title": "Virgin",
-            "click": {
-                "actions": [
-                    {
-                        "type": "publishText",
-                        "text": "Virgin"
-                    }
-                ]
-            }
-        }
-    ]
-}
 
 let openConvs = {};
 //agent._init()
@@ -76,40 +45,12 @@ agent.on('cqm.ExConversationChangeNotification', notificationBody => {
                             'role': 'ASSIGNED_AGENT'
                         }]
                     }, 
-                    
-                    // () => {
-                    //     agent.publishEvent({
-                    //         dialogId: change.result.convId,
-                    //         event: {
-                    //             type: 'ContentEvent',
-                    //             contentType: 'text/plain',
-                    //             message: 'SASA test'
-                    //         }
-                    //     });
-                    // });
 
                     () => {
-                       // sendSC(change.result.convId,pcs.login);
-                      //  testText(change.result.convId,"TESTING LOL1")
-                      sendingSC(change.result.convId,fortune);
-                    //   agent.publishEvent({
-                    //     dialogId: change.result.convId,
-                    //     event: {
-                    //         type: 'RichContentEvent',
-                    //         content: fortune
-                    //     }
-                         
-                    //     }, (e, r) => {
-                    //         if (e) {
-                    //             console.log(`sendRichContent card ${change.result.convId} ${JSON.stringify(e)} ${JSON.stringify(test)}`)
-                    //         } else {
-                    //             console.log(`sendRichContent successful: ${JSON.stringify(r)}`)
-                  //        }
-                      //  }
-                   // );
-    
-                    
-                    });
+                      sendingSC(change.result.convId,fortune);       
+                    }
+                
+                );
 
        
 
@@ -135,42 +76,43 @@ body.changes.forEach(c => {
     // In the current version MessagingEventNotification are recived also without subscription
     // Will be fixed in the next api version. So we have to check if this notification is handled by us.
     if (openConvs[c.dialogId]) {
+        //console.log(JSON.stringify(openConvs)+ "  CONV")
     // add to respond list all content event not by me
-    if (c.event.type === 'ContentEvent' && c.originatorId !== agent.agentId) {
+    if (c.originatorMetadata.role === 'CONSUMER' && c.event.type === 'ContentEvent' && c.originatorId !== agent.agentId  ) {
+        // console.log(c.originatorId + "  ORIGINATOR")
+        // console.log(agent.agentId + "  AGENTID")
+
         respond[`${body.dialogId}-${c.sequence}`] = {
             dialogId: body.dialogId,
             sequence: c.sequence,
             message: c.event.message
         };
-        let msg = c.event.message.toLowerCase();
-if (msg == "leo"){
-    
-    fetchHoroscopes(body.dialogId,msg);
+                let msg = c.event.message.toLowerCase();
+                console.log(msg+  "  MSG IS")
 
-                        agent.publishEvent({
-                            dialogId: body.dialogId,
-                            event: {
-                                type: 'ContentEvent',
-                                contentType: 'text/plain',
-                                message: 'You are the best Lion!'
-                            }
-                        }),(e,r) => {
-                            if (e){
-                                console.log(`ERROR ${e,r}`)
-                            } else { console.log(`success ${r}`)}
-                            ;
+               // console.log(`${msg}   MESSAGEIS `)
+                  if (msg == "leo" ) {
+                 console.log("GOT LEO")
+
+                  textSend(body.dialogId,"Fetching your daily fortune...")
+                   fetchHoroscopes(body.dialogId,msg);       
                    
-}
-      console.log("CONTENT " + JSON.stringify(respond) );
+                  } else if (msg.length > 0) {
+                    textSend(body.dialogId,"Sorry, I don't speak free text :'(");
+                    console.log("LONGER THAN 0 MSG")
+               }
+                }
+       console.log("CONTENT " + JSON.stringify(respond) );
 
-    }
+        
     // remove from respond list all the messages that were already read
     if (c.event.type === 'AcceptStatusEvent' && c.originatorId === agent.agentId) {
         c.event.sequenceList.forEach(seq => {
             delete respond[`${body.dialogId}-${seq}`];
-    });
+         });
+        
+      }
     }
-    }}
 });
 
 // publish read, and echo
@@ -179,9 +121,8 @@ Object.keys(respond).forEach(key => {
 agent.publishEvent({
     dialogId: contentEvent.dialogId,
     event: {type: "AcceptStatusEvent", status: "READ", sequenceList: [contentEvent.sequence]}
-});
-agent.emit(agent.CONTENT_NOTIFICATION, contentEvent);
-});
+        });
+    });
 });
 
 agent.on('closed', data => {
@@ -225,7 +166,7 @@ function sendingSC(conversationID, content) {
           })
         }
 
-        function textSend(conversationID, myText) {
+       function textSend(conversationID, myText) {
             console.log("Sending Text");
            // session[conversationID]["typing"] = true;
            //    updateTyping(conversationID, true);
@@ -236,8 +177,13 @@ function sendingSC(conversationID, content) {
                                 contentType: 'text/plain',
                                 message: myText
                             }
-                        });
+                        }),(e,r) => {
+                            if (e){
+                                console.log(`ERROR ${e,r}`)
+                            } else { console.log(`success ${r}`)}
+                            ;;
                     }
+                } 
 
                    const fetchHoroscopes = (conversationID,sign) => {
                     var options = {
@@ -258,41 +204,4 @@ function sendingSC(conversationID, content) {
                             console.log(err+ " ERROR")
                         });
                     }
-                    // const fetchHoroscopes = async (sign) => {
 
-                    //    await fetch(`https://www.astrology.com/horoscope/daily/${sign}.html`)
-                    //     .then( response => response.json())
-                    //         .then( json => {
-                    //             console.log(json)
-                    //             })
-                    //         .catch( error => {
-                    //                console.log(error)
-                    //             });
-                    //         }
-
-                    //     return new Promise((resolve, reject) => {
-                    //     request(`https://www.astrology.com/horoscope/daily/${sign}.html`, { json: true }, (err, res, body) => {
-                    //         if (err) { 
-                    //             reject(response.error)
-                    //             return console.log(err); }
-                    //             {
-                    //               resolve({pageContent: response.data, url})
-                    //             }
-                    //         }
-                    //     }
-                    // }
-                
-                          
-
-
-                    //     return new Promise((resolve, reject) => {
-                    //       const url = `https://www.astrology.com/horoscope/daily/${sign}.html`
-                    //       muxbots.http.get(url, (response) => {
-                    //         if (!response.data) {
-                    //           reject(response.error)
-                    //         }
-                    //         resolve({pageContent: response.data, url})
-                        
-                    //       })
-                    //     })
-                    // }
