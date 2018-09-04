@@ -6,8 +6,8 @@ var rp = require('request-promise');
 
 const agent = new Agent({
     accountId: "56566693",
-    username: "VenusBot",
-    password: "Toptop11"
+    username: "x",
+    password: "x"
     });
 
 let myConfig = {
