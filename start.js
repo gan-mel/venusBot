@@ -48,6 +48,7 @@ agent.on('cqm.ExConversationChangeNotification', notificationBody => {
                     }, 
 
                     () => {
+                      textSend(change.result.convId,"Choose your fortune..")
                       sendingSC(change.result.convId,fortune);       
                     }
                 
@@ -103,7 +104,6 @@ body.changes.forEach(c => {
                    
 
             } else  if(msg == "transferring to a real astrologist"){
-                    console.log("Trasnfer outsdie")
                     transferSkill(body.dialogId,"1144089632")  
                   } 
                    //else if (msg.length > 0 && ) {
